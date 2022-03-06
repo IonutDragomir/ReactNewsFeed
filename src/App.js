@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useRef, useState } from "react";
+import "./App.css";
+import {NewsBody} from "./components/NewsBody"
 
 function App() {
+  const input = useRef(null);
+  const [search, setSearch] = useState("Latest News");
+  function getValue() {
+    setSearch(input.current.value);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="searchBody">
+        <h1 className="containerTitle">Search your news:</h1>
+        <input type="text" ref={input} className="searchBar" />
+        <button className="searchButton" type="button" onClick={getValue}>
+          Search
+        </button>
+      </div>
+
+      <NewsBody search={search} />
     </div>
   );
 }
